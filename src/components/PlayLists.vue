@@ -1,27 +1,26 @@
 <template>
-    <div>
-      <h2>Play List</h2>
-      <ul>
-        <li v-for="song in playlist" :key="song.songid" @click="selectSong(song)">
-          {{ song.title }} - {{ song.artist }}
-        </li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      playlist: {
-        type: Array,
-        required: true
-      }
+  <div>
+    <h2>Playlist</h2>
+    <ul>
+      <li v-for="song in playlist" :key="song.songid">
+        <img :src="song.imageurl" alt="Song artwork" />
+        <span>{{ song.title }} - {{ song.artist }}</span>
+        <button @click="playSong(song)">Play</button>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PlayList',
+  props: {
+    playlist: Array,
+  },
+  methods: {
+    playSong(song) {
+      this.$emit('song-played', song);
     },
-    methods: {
-      selectSong(song) {
-        this.$emit('song-selected', song);
-      }
-    }
-  };
-  </script>
-  
+  },
+};
+</script>

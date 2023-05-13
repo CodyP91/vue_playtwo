@@ -5,7 +5,7 @@
       <img :src="currentSong.imageurl" alt="Song artwork" />
       <p>{{ currentSong.title }} - {{ currentSong.artist }}</p>
     </div>
-    <p v-else>No song is playing...</p>
+    <p v-else>No song is playing...</p>cd 
   </div>
 </template>
 
