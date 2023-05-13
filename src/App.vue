@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <song-list :songs="songs" @song-selected="addSongToPlaylist"></song-list>
+    <play-list :playlist="playlist" @song-selected="selectSong"></play-list>
+    <now-playing :song="nowPlaying"></now-playing>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SongList from '@/components/SongLists.vue';
+import PlayList from '@/components/PlayLists.vue';
+import NowPlaying from '@/components/NowPlaying.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    SongList,
+    PlayList,
+    NowPlaying
+  },
+  data() {
+    return {
+      songs: [
+        {
+          title: 'Song 1',
+          artist: 'Artist 1',
+          songid: '1',
+          imageurl: 'https://placehold.it/200x200'
+        },
+        {
+          title: 'Song 2',
+          artist: 'Artist 2',
+          songid: '2',
+          imageurl: 'https://placehold.it/200x200'
+        },
+        {
+          title: 'Song 3',
+          artist: 'Artist 3',
+          songid: '3',
+          imageurl: 'https://placehold.it/200x200'
+        }
+      ],
+      playlist: [],
+      nowPlaying: null
+    };
+  },
+  methods: {
+    addSongToPlaylist(song) {
+      this.playlist.push(song);
+    },
+    selectSong(song) {
+      this.nowPlaying = song;
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
